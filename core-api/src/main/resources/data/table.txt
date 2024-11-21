@@ -1,0 +1,48 @@
+create table payments_event
+(
+    id              bigint auto_increment primary key,
+    buyer_id        bigint          not null,
+    is_payment_done boolean         not null default false,
+    payment_key     varchar(255) unique,
+    order_id        varchar(255) unique,
+    type            enum ('NORMAL') not null,
+    order_name      varchar(255)    not null,
+    method          enum ('EASY_PAY'),
+    psp_raw_data    JSON,
+    approved_at     DATETIME,
+    created_at      DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at      DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+create table payments_orders
+(
+    id                    bigint auto_increment primary key,
+    payment_event_id      bigint                                                             not null,
+    seller_id             bigint                                                             not null,
+    product_id            bigint                                                             not null,
+    order_id              varchar(255)                                                       not null,
+    amount                decimal(12, 2)                                                     not null,
+    payments_order_status enum ('NOT_STARTED', 'EXECUTING', 'SUCCESS', 'FAILURE', 'UNKNOWN') NOT NULL DEFAULT 'NOT_STARTED',
+    ledger_updated        boolean                                                            not null default false,
+    wallet_updated        boolean                                                            not null default false,
+    failed_count          tinyint                                                            not null default 0,
+    threshold             tinyint                                                            not null default 5,
+    created_at            DATETIME                                                           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at            DATETIME                                                           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    foreign key (payment_event_id) references payments_event (id)
+);
+
+create table payment_order_histories
+(
+    id               bigint auto_increment primary key,
+    payment_order_id bigint   not null,
+    previous_status  enum ('NOT_STARTED', 'EXECUTING', 'SUCCESS', 'FAILURE', 'UNKNOWN'),
+    new_status       enum ('NOT_STARTED', 'EXECUTING', 'SUCCESS', 'FAILURE', 'UNKNOWN'),
+    changed_by       varchar(255),
+    reason           varchar(255),
+    created_at       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    foreign key (payment_order_id) references payments_orders(id)
+);
+
