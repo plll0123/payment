@@ -11,6 +11,7 @@ dependencies {
         exclude("org.springframework.boot", "spring-boot-starter-tomcat")
         exclude("org.springframework", "spring-webmvc")
     }
+    implementation(project(":core-domain"))
 }
 
 tasks.getByName("bootJar") {
