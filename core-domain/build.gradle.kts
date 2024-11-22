@@ -9,9 +9,8 @@ repositories {
 
 dependencies {
     runtimeOnly(project(":core-persistence"))
-    implementation("org.springframework.boot:spring-boot-autoconfigure:3.2.1")
-    implementation("org.springframework:spring-context:6.1.15")
-}
+
+    implementation("org.springframework.boot:spring-boot-starter")}
 
 tasks.getByName("bootJar") {
     enabled = false
@@ -19,11 +18,4 @@ tasks.getByName("bootJar") {
 
 tasks.getByName("jar") {
     enabled = true
-}
-
-tasks.register<Test>("domain-test") {
-    println("domain-test running")
-    println("domain-test running")
-    println("domain-test running")
-    println("domain-test running")
 }

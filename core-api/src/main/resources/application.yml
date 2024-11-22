@@ -4,6 +4,7 @@ spring:
   config:
     import:
       - persistence.yml
+      - client.yml
 
 
   thymeleaf:
@@ -13,8 +14,3 @@ spring:
       ddl-auto: create
     open-in-view: false
     show-sql: true
-
-PSP:
-  toss:
-    secretKey: test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6
-    url: https://api.tosspayments.com

@@ -20,6 +20,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 //    implementation("com.epages:restdocs-api-spec-gradle-plugin:$gradlePlugin")
     implementation("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
