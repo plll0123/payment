@@ -9,7 +9,7 @@ repositories {
 
 dependencies {
     runtimeOnly(project(":core-persistence"))
-
+    runtimeOnly(project(":client"))
     implementation("org.springframework.boot:spring-boot-starter")}
 
 tasks.getByName("bootJar") {
