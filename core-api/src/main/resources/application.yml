@@ -6,11 +6,6 @@ spring:
       - persistence.yml
       - client.yml
 
-
   thymeleaf:
     cache: false
-  jpa:
-    hibernate:
-      ddl-auto: create
-    open-in-view: false
-    show-sql: true
+    
